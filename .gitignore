@@ -1,0 +1,20 @@
+# data & models (reproduce with `make train`)
+backend/data/raw/*
+backend/data/processed/*
+backend/models/*
+!**/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# node
+frontend/node_modules/
+frontend/dist/
+frontend/.env
