@@ -1,0 +1,301 @@
+{
+  "trained_at": "2026-10-31T14:51:12.974308+00:00",
+  "best_model": "random_forest",
+  "target": "Status",
+  "features": [
+    "loan_amount",
+    "term",
+    "income",
+    "Credit_Score",
+    "dtir1",
+    "loan_limit",
+    "Gender",
+    "approv_in_adv",
+    "loan_type",
+    "loan_purpose",
+    "Credit_Worthiness",
+    "open_credit",
+    "business_or_commercial",
+    "Neg_ammortization",
+    "interest_only",
+    "lump_sum_payment",
+    "occupancy_type",
+    "total_units",
+    "credit_type",
+    "co_applicant_credit_type",
+    "age",
+    "submission_of_application",
+    "Region"
+  ],
+  "excluded_leaky_columns": [
+    "rate_of_interest",
+    "Interest_rate_spread",
+    "Upfront_charges",
+    "LTV",
+    "property_value",
+    "construction_type",
+    "Secured_by",
+    "Security_Type"
+  ],
+  "n_rows": 148670,
+  "default_rate": 0.24644514696979888,
+  "comparison": [
+    {
+      "model": "random_forest",
+      "cv_score": 0.8738556059334593,
+      "best_params": {
+        "max_depth": 20,
+        "min_samples_leaf": 5
+      },
+      "seconds": 81.9,
+      "test_accuracy": 0.8750252236496939,
+      "test_precision": 0.7981181908220535,
+      "test_recall": 0.6597980349344978,
+      "test_f1": 0.7223965336919169,
+      "test_roc_auc": 0.8791215462941344,
+      "test_confusion_matrix": [
+        [
+          21183,
+          1223
+        ],
+        [
+          2493,
+          4835
+        ]
+      ]
+    },
+    {
+      "model": "decision_tree",
+      "cv_score": 0.8590465361734259,
+      "best_params": {
+        "max_depth": 12,
+        "min_samples_leaf": 50
+      },
+      "seconds": 9.1,
+      "test_accuracy": 0.8535010425775207,
+      "test_precision": 0.7100056529112493,
+      "test_recall": 0.6855895196506551,
+      "test_f1": 0.6975840044432102,
+      "test_roc_auc": 0.8663903925697147,
+      "test_confusion_matrix": [
+        [
+          20354,
+          2052
+        ],
+        [
+          2304,
+          5024
+        ]
+      ]
+    },
+    {
+      "model": "logistic_regression",
+      "cv_score": 0.8377087379156704,
+      "best_params": {
+        "C": 0.1
+      },
+      "seconds": 12.1,
+      "test_accuracy": 0.8302280217932333,
+      "test_precision": 0.6569383259911894,
+      "test_recall": 0.6512008733624454,
+      "test_f1": 0.6540570175438597,
+      "test_roc_auc": 0.8413068478811235,
+      "test_confusion_matrix": [
+        [
+          19914,
+          2492
+        ],
+        [
+          2556,
+          4772
+        ]
+      ]
+    },
+    {
+      "model": "svm",
+      "cv_score": 0.8370687246005807,
+      "best_params": {
+        "C": 1.0
+      },
+      "seconds": 12.5,
+      "test_accuracy": 0.8675253918073585,
+      "test_precision": 0.9003071107961257,
+      "test_recall": 0.5200600436681223,
+      "test_f1": 0.6592855289334832,
+      "test_roc_auc": 0.8413206854098267,
+      "test_confusion_matrix": [
+        [
+          21984,
+          422
+        ],
+        [
+          3517,
+          3811
+        ]
+      ]
+    },
+    {
+      "model": "naive_bayes",
+      "cv_score": 0.8147113331960965,
+      "best_params": {
+        "var_smoothing": 0.001
+      },
+      "seconds": 4.6,
+      "test_accuracy": 0.851550413667855,
+      "test_precision": 0.7717269675494218,
+      "test_recall": 0.5646834061135371,
+      "test_f1": 0.652167060677699,
+      "test_roc_auc": 0.8209606712828792,
+      "test_confusion_matrix": [
+        [
+          21182,
+          1224
+        ],
+        [
+          3190,
+          4138
+        ]
+      ]
+    }
+  ],
+  "options": {
+    "categorical": {
+      "loan_limit": [
+        "cf",
+        "ncf"
+      ],
+      "Gender": [
+        "Female",
+        "Joint",
+        "Male",
+        "Sex Not Available"
+      ],
+      "approv_in_adv": [
+        "nopre",
+        "pre"
+      ],
+      "loan_type": [
+        "type1",
+        "type2",
+        "type3"
+      ],
+      "loan_purpose": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "Credit_Worthiness": [
+        "l1",
+        "l2"
+      ],
+      "open_credit": [
+        "nopc",
+        "opc"
+      ],
+      "business_or_commercial": [
+        "b/c",
+        "nob/c"
+      ],
+      "Neg_ammortization": [
+        "neg_amm",
+        "not_neg"
+      ],
+      "interest_only": [
+        "int_only",
+        "not_int"
+      ],
+      "lump_sum_payment": [
+        "lpsm",
+        "not_lpsm"
+      ],
+      "occupancy_type": [
+        "ir",
+        "pr",
+        "sr"
+      ],
+      "total_units": [
+        "1U",
+        "2U",
+        "3U",
+        "4U"
+      ],
+      "credit_type": [
+        "CIB",
+        "CRIF",
+        "EQUI",
+        "EXP"
+      ],
+      "co_applicant_credit_type": [
+        "CIB",
+        "EXP"
+      ],
+      "age": [
+        "25-34",
+        "35-44",
+        "45-54",
+        "55-64",
+        "65-74",
+        "<25",
+        ">74"
+      ],
+      "submission_of_application": [
+        "not_inst",
+        "to_inst"
+      ],
+      "Region": [
+        "North",
+        "North-East",
+        "central",
+        "south"
+      ]
+    },
+    "numeric": {
+      "loan_amount": {
+        "min": 16500.0,
+        "max": 3576500.0,
+        "median": 296500.0
+      },
+      "term": {
+        "min": 96.0,
+        "max": 360.0,
+        "median": 360.0
+      },
+      "income": {
+        "min": 0.0,
+        "max": 578580.0,
+        "median": 5760.0
+      },
+      "Credit_Score": {
+        "min": 500.0,
+        "max": 900.0,
+        "median": 699.0
+      },
+      "dtir1": {
+        "min": 5.0,
+        "max": 61.0,
+        "median": 39.0
+      }
+    },
+    "defaults_categorical": {
+      "loan_limit": "cf",
+      "Gender": "Male",
+      "approv_in_adv": "nopre",
+      "loan_type": "type1",
+      "loan_purpose": "p3",
+      "Credit_Worthiness": "l1",
+      "open_credit": "nopc",
+      "business_or_commercial": "nob/c",
+      "Neg_ammortization": "not_neg",
+      "interest_only": "not_int",
+      "lump_sum_payment": "not_lpsm",
+      "occupancy_type": "pr",
+      "total_units": "1U",
+      "credit_type": "CIB",
+      "co_applicant_credit_type": "CIB",
+      "age": "45-54",
+      "submission_of_application": "to_inst",
+      "Region": "North"
+    }
+  }
+}
