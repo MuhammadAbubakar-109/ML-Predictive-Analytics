@@ -1,0 +1,88 @@
+# Single source of truth: data, features, models, hyperparameter grids.
+data:
+  path: data/raw/Loan_Default.csv
+  target: Status                     # 1 = defaulted, 0 = repaid
+  rename: {"co-applicant_credit_type": "co_applicant_credit_type"}
+
+  # Columns excluded to prevent target leakage / noise:
+  #  - rate_of_interest, Interest_rate_spread, Upfront_charges: set AFTER approval,
+  #    missing for ~100% of defaulted loans -> they reveal the label.
+  #  - LTV, property_value: missing ONLY on defaulted loans (same artifact).
+  #  - construction_type, Secured_by, Security_Type: constant for 99.98% of rows.
+  drop_columns:
+    - rate_of_interest
+    - Interest_rate_spread
+    - Upfront_charges
+    - LTV
+    - property_value
+    - construction_type
+    - Secured_by
+    - Security_Type
+
+split:
+  test_size: 0.2
+  random_state: 42
+
+features:
+  numeric: [loan_amount, term, income, Credit_Score, dtir1]
+  engineered: [loan_to_income]       # built in src/ml/features.py
+  categorical:
+    - loan_limit
+    - Gender
+    - approv_in_adv
+    - loan_type
+    - loan_purpose
+    - Credit_Worthiness
+    - open_credit
+    - business_or_commercial
+    - Neg_ammortization
+    - interest_only
+    - lump_sum_payment
+    - occupancy_type
+    - total_units
+    - credit_type
+    - co_applicant_credit_type
+    - age
+    - submission_of_application
+    - Region
+
+training:
+  cv_folds: 3
+  scoring: roc_auc                   # best model = highest cross-validated ROC-AUC
+  missing_indicators: false          # don't feed "was missing" flags (leakage risk)
+
+# class_weight=balanced handles the ~25% default rate (Naive Bayes has no such option).
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    fixed: {max_iter: 1000, class_weight: balanced}
+    params: {C: [0.1, 1.0, 10.0]}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeClassifier
+    fixed: {class_weight: balanced, random_state: 42}
+    params: {max_depth: [8, 12], min_samples_leaf: [20, 50]}
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier
+    fixed: {n_estimators: 150, class_weight: balanced, n_jobs: 2, random_state: 42}
+    params: {max_depth: [12, 20], min_samples_leaf: [5, 10]}
+  naive_bayes:
+    class: sklearn.naive_bayes.GaussianNB
+    params: {var_smoothing: [1.0e-9, 1.0e-6, 1.0e-3]}
+  svm:
+    # Linear SVM + probability calibration: RBF-SVC is O(n^2) and impractical on 119k rows.
+    class: sklearn.svm.LinearSVC
+    calibrate: true
+    fixed: {class_weight: balanced, dual: false, max_iter: 5000}
+    params: {C: [0.1, 1.0]}
+
+paths:
+  model: models/model.joblib
+  metadata: models/metadata.json
+
+  # Individual fitted models, saved after training.
+  models:
+    random_forest: models/random_forest.joblib
+    decision_tree: models/decision_tree.joblib
+    logistic_regression: models/logistic_regression.joblib
+    svm: models/svm.joblib
+    naive_bayes: models/naive_bayes.joblib
