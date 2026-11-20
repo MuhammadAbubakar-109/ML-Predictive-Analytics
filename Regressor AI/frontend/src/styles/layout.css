@@ -1,0 +1,96 @@
+/* ============ App shell ============ */
+.shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+/* ---- navigation rail ---- */
+.nav {
+  position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column; gap: 30px;
+  padding: 22px 14px;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; padding: 0 8px; text-decoration: none; color: var(--ink); }
+.brand span { display: grid; line-height: 1.15; }
+.brand strong { font-family: var(--font-display); font-size: 19px; letter-spacing: -0.02em; }
+.brand small { font-size: 12.5px; color: var(--muted); }
+.brand-mark rect { fill: var(--panel); }
+.brand-mark path { fill: none; stroke: var(--panel-accent); stroke-width: 3; stroke-linecap: round; }
+.brand-mark .needle { stroke: #fff; }
+
+.nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.nav a {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 10px 12px; border-radius: 10px;
+  color: var(--muted); font-weight: 560; text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+}
+.nav a:hover { background: var(--surface-2); color: var(--ink); }
+.nav a.is-active { color: var(--ink); background: var(--accent-soft); }
+.nav a.is-active::before {
+  content: ""; position: absolute; left: -14px; top: 9px; bottom: 9px; width: 3px;
+  border-radius: 0 3px 3px 0; background: var(--accent);
+}
+.count {
+  margin-left: auto; font-style: normal; font-size: 12px; font-weight: 650;
+  min-width: 22px; padding: 1px 7px; text-align: center;
+  border-radius: 99px; background: var(--surface-3); color: var(--ink-2);
+}
+
+/* ---- stage: top bar + page ---- */
+.stage { min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 32px; min-height: 58px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+}
+.topbar-title { display: none; font-family: var(--font-display); font-weight: 650; font-size: 17px; }
+.palette-trigger {
+  display: flex; align-items: center; gap: 10px; flex: 0 1 380px; margin-right: auto;
+  height: 36px; padding: 0 10px 0 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--muted); text-align: left;
+}
+.palette-trigger:hover { border-color: var(--line-strong); color: var(--ink-2); }
+.palette-trigger span { flex: 1; font-size: 13.5px; }
+
+.main { width: 100%; max-width: 1320px; margin: 0 auto; padding: 28px 32px 96px; outline: none; }
+
+.page-header {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+.page-header h1 { font-size: clamp(27px, 3vw, 36px); font-weight: 700; letter-spacing: -0.025em; }
+.page-sub { margin-top: 8px; max-width: 64ch; color: var(--muted); font-size: 15.5px; }
+.page-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.loading { display: grid; gap: 14px; }
+.loading-grid { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 24px; margin-top: 18px; }
+.fatal { max-width: 520px; margin: 18vh auto; padding: 0 20px; display: grid; gap: 14px; justify-items: start; }
+
+/* ---- phones and small tablets: rail becomes a bottom tab bar ---- */
+@media (max-width: 900px) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .nav {
+    position: fixed; z-index: 30; left: 0; right: 0; top: auto; bottom: 0; height: auto;
+    flex-direction: row; padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    border-right: 0; border-top: 1px solid var(--line);
+  }
+  .nav .brand { display: none; }
+  .nav ul { flex: 1; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+  .nav a { flex-direction: column; gap: 3px; padding: 7px 4px; font-size: 11.5px; }
+  .nav a.is-active::before { display: none; }
+  .count { position: absolute; top: 2px; right: 14%; margin: 0; min-width: 18px; font-size: 10.5px; padding: 0 5px; }
+  .topbar { padding: 8px 16px; }
+  .topbar-title { display: block; }
+  .palette-trigger { flex: 0 0 auto; width: 36px; padding: 0; justify-content: center; margin-right: 0; }
+  .palette-trigger span, .palette-trigger kbd { display: none; }
+  .topbar-title { margin-right: auto; }
+  .main { padding: 20px 16px 110px; }
+  .loading-grid { grid-template-columns: minmax(0, 1fr); }
+}

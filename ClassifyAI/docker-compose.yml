@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env.example
+    volumes:
+      - ./backend/models:/app/models:ro
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: https://YOUR-BACKEND-URL.com
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

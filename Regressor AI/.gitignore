@@ -1,0 +1,18 @@
+# data (the CSV is small, so it is kept; add it here if yours is private)
+backend/data/processed/*
+!backend/data/**/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.env
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# node
+frontend/node_modules/
+frontend/dist/
+frontend/.env

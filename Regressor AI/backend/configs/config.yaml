@@ -1,0 +1,80 @@
+# Single source of truth for data, features, and model hyperparameters.
+data:
+  path: data/raw/employee_salary_dataset_10000.csv
+  target: Monthly_Salary
+  drop_columns: [Employee_ID, Country, Currency]   # identifier / constant columns
+
+split:
+  test_size: 0.2
+  random_state: 42
+
+features:
+  numeric:
+    - Experience_Years
+    - Industry_Experience_Years
+    - Years_in_Current_Role
+    - Years_at_Company
+    - Certifications_Count
+    - Technical_Skills_Count
+    - Team_Size_Managed
+    - Employee_Count
+    - Working_Hours_Per_Week
+    - Performance_Rating
+    - Job_Grade
+    - Job_Evaluation_Score
+    - Local_Median_Salary
+    - Inflation_Rate
+    - Year
+  categorical:
+    - Job_Title
+    - Job_Family
+    - Job_Level
+    - Department
+    - Industry
+    - Education_Level
+    - Field_of_Study
+    - Management_Responsibility
+    - Company_Size
+    - Company_Type
+    - Region
+    - City
+    - Employment_Type
+    - Remote_Work_Type
+
+training:
+  cv_folds: 3
+  log_target: true          # salaries are right-skewed -> fit on log1p(salary)
+  selection_metric: rmse    # best model = lowest cross-validated RMSE
+
+# Each model: sklearn class + hyperparameter grid (GridSearchCV).
+models:
+  linear_regression:
+    class: sklearn.linear_model.LinearRegression
+    params: {}
+  ridge:
+    class: sklearn.linear_model.Ridge
+    params: {alpha: [0.1, 1.0, 10.0, 100.0]}
+  lasso:
+    class: sklearn.linear_model.Lasso
+    params: {alpha: [0.0001, 0.001, 0.01]}
+  decision_tree:
+    class: sklearn.tree.DecisionTreeRegressor
+    params: {max_depth: [8, 12, 16], min_samples_leaf: [5, 10, 20]}
+  random_forest:
+    class: sklearn.ensemble.RandomForestRegressor
+    fixed: {n_estimators: 100, n_jobs: -1, random_state: 42}
+    params: {max_depth: [20], min_samples_leaf: [2, 5]}
+  svr:
+    class: sklearn.svm.SVR
+    params: {C: [1.0, 10.0], epsilon: [0.05, 0.1]}
+
+paths:
+  model: models/model.joblib          # copy of the best model (kept for compatibility)
+  metadata: models/metadata.json
+  models:                             # every fitted model is saved here
+    linear_regression: models/linear_regression.joblib
+    ridge: models/ridge.joblib
+    lasso: models/lasso.joblib
+    decision_tree: models/decision_tree.joblib
+    random_forest: models/random_forest.joblib
+    svr: models/svr.joblib

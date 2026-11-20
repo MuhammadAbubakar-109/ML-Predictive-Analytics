@@ -1,0 +1,132 @@
+/* ============ The dark "instrument" panel and everything drawn inside it ============ */
+.instrument {
+  --ink: var(--panel-ink);
+  --ink-2: var(--panel-ink);
+  --muted: var(--panel-muted);
+  --line: var(--panel-line);
+  --line-strong: color-mix(in srgb, var(--panel-line) 70%, var(--panel-muted));
+  --surface: var(--panel-2);
+  --surface-2: color-mix(in srgb, var(--panel-2) 70%, var(--panel));
+  --surface-3: color-mix(in srgb, var(--panel-ink) 8%, transparent);
+  --accent: var(--panel-accent);
+  --accent-ink: #0a1020;
+  --accent-strong: #b3c0ff;
+  --low-ink: var(--low);
+  --mid-ink: var(--mid);
+  --high-ink: var(--high);
+
+  position: relative; overflow: hidden; padding: 14px 14px 20px;
+  background: var(--panel); color: var(--panel-ink);
+  border: 1px solid var(--panel-line); border-radius: 24px; box-shadow: var(--shadow-pop);
+}
+.instrument::before {
+  content: ""; position: absolute; inset: -30% -20% auto; height: 70%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--panel-accent) 16%, transparent), transparent);
+}
+.instrument > * { position: relative; }
+.segmented-panel { display: flex; width: 100%; }
+.segmented-panel .segmented-item { flex: 1; }
+.instrument-body { padding: 18px 8px 0; }
+
+.result { display: grid; gap: 14px; }
+.result-note { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+.result-note strong { color: var(--ink); }
+.facts { display: grid; gap: 0; margin: 4px 0 0; border-top: 1px solid var(--line); }
+.facts > div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; text-align: right; }
+.delta { display: inline-flex; align-items: center; gap: 4px; }
+.result-actions { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+
+/* ---- the headline salary ---- */
+.figure {
+  display: flex; align-items: baseline; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 4px 0 0;
+  font-family: var(--font-display); font-size: clamp(40px, 5vw, 54px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.figure span { font-size: 0.4em; font-weight: 600; letter-spacing: 0; color: var(--panel-accent); }
+.figure small { flex-basis: 100%; text-align: center; font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+.figure.is-idle { color: var(--muted); }
+.figure-sub { margin-top: -8px; text-align: center; color: var(--muted); font-size: 14px; }
+
+/* ---- the salary ruler ---- */
+.ruler { display: block; width: 100%; max-width: 360px; margin: 0 auto; overflow: visible; }
+.ruler-track { stroke: color-mix(in srgb, var(--panel-ink) 14%, transparent); stroke-width: 6; stroke-linecap: round; }
+.ruler-band { fill: color-mix(in srgb, var(--panel-accent) 38%, transparent); stroke: var(--panel-accent); stroke-width: 1.5; }
+.ruler-dot { fill: #fff; stroke: var(--panel-accent); stroke-width: 4; filter: drop-shadow(0 0 8px color-mix(in srgb, var(--panel-accent) 65%, transparent)); }
+.ruler-mean { stroke: var(--mid); stroke-width: 2; stroke-dasharray: 3 3; }
+.ruler-tick { stroke: var(--panel-muted); stroke-width: 1.5; opacity: 0.7; }
+.ruler-label { fill: var(--panel-muted); font-size: 11.5px; }
+.ruler-range { fill: var(--panel-ink); font-size: 12px; font-weight: 650; }
+.ruler.is-idle .ruler-track { stroke-dasharray: 2 8; }
+
+/* ---- one-dot-per-model strip ---- */
+.strip { display: grid; gap: 12px; }
+.strip-axis, .strip-row { display: grid; grid-template-columns: 124px minmax(0, 1fr) 54px; align-items: center; gap: 10px; }
+.strip-scale { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
+.strip-name { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 560; }
+.strip-name i { flex: none; width: 8px; height: 8px; border-radius: 50%; }
+.strip-track { position: relative; height: 28px; border-radius: 99px; background: color-mix(in srgb, var(--panel-ink) 7%, transparent); }
+.strip-track::after { content: ""; position: absolute; left: 50%; top: 4px; bottom: 4px; width: 1.5px; background: var(--panel-ink); opacity: 0.25; }
+.strip-dot { position: absolute; top: 50%; z-index: 1; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; border: 3px solid var(--panel); }
+.strip-val { text-align: right; font-size: 13px; font-weight: 650; }
+.all-models { display: grid; gap: 12px; }
+
+/* ---- what-if ---- */
+.sensitivity { display: grid; gap: 14px; }
+.sens-controls { display: flex; align-items: end; gap: 10px; }
+.sens-controls .field { flex: 1; }
+.linechart { display: block; width: 100%; height: auto; overflow: visible; }
+.grid-line { stroke: var(--line); stroke-width: 1; }
+.chart-text { fill: var(--muted); font-size: 12px; }
+.chart-axis-title { font-size: 11.5px; font-weight: 600; }
+.line-area { fill: color-mix(in srgb, var(--accent) 14%, transparent); }
+.line-stroke { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.line-dot { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.line-marker { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: 0.7; }
+.chart-now { font-weight: 650; fill: var(--ink); }
+.chart-tip { fill: var(--panel); stroke: var(--line-strong); }
+.chart-tip-text { fill: var(--panel-muted); font-size: 11.5px; }
+.chart-tip-text.is-strong { fill: var(--panel-ink); font-weight: 650; }
+
+.catbars { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.catbars li { display: grid; grid-template-columns: minmax(80px, 128px) minmax(0, 1fr) 50px; align-items: center; gap: 10px; font-size: 13px; }
+.catbars-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.catbars-name em { margin-left: 6px; font-style: normal; font-size: 11px; font-weight: 650; color: var(--accent); }
+.catbars-track { height: 10px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
+.catbars-track span { display: block; height: 100%; border-radius: 99px; background: color-mix(in srgb, var(--accent) 55%, transparent); }
+.catbars li.is-current .catbars-track span { background: var(--accent); }
+.catbars-val { text-align: right; font-weight: 650; }
+
+/* ============ Charts that live on normal pages ============ */
+.bars { display: grid; gap: 15px; margin: 0; padding: 0; list-style: none; }
+.bars li { display: grid; grid-template-columns: 150px minmax(0, 1fr) 62px; align-items: center; gap: 12px; }
+.bars-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 560; }
+.bars-name i { flex: none; width: 9px; height: 9px; border-radius: 50%; }
+.bars-track { height: 12px; border-radius: 99px; background: var(--surface-3); overflow: hidden; }
+.bars-fill { display: block; height: 100%; border-radius: 99px; transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.bars-val { text-align: right; font-size: 14px; }
+.bars li.is-best .bars-val { font-weight: 700; color: var(--low-ink); }
+
+.scatter { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
+.scatter-dot { stroke: var(--surface); stroke-width: 2; }
+.chart-point-label { fill: var(--ink-2); font-weight: 560; font-size: 12px; }
+
+.grouped { display: grid; gap: 14px; }
+.grouped-key { display: flex; gap: 18px; font-size: 12.5px; color: var(--muted); }
+.grouped-key span { display: inline-flex; align-items: center; gap: 6px; }
+.grouped-key i { width: 18px; height: 8px; border-radius: 99px; }
+.is-a { background: color-mix(in srgb, var(--accent) 45%, transparent); }
+.is-b { background: var(--accent); }
+.grouped ul { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.grouped li { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: center; gap: 12px; }
+.grouped-bars { display: grid; gap: 4px; }
+.grouped-bar { position: relative; display: block; min-width: 44px; height: 16px; border-radius: 99px; }
+.grouped-bar b { position: absolute; left: calc(100% + 8px); top: 0; font-size: 12px; font-weight: 600; line-height: 16px; white-space: nowrap; }
+.grouped-bars { padding-right: 56px; }
+
+.histogram { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; align-items: end; height: 190px; }
+.histogram-col { position: relative; display: grid; grid-template-rows: 18px 1fr 20px; height: 100%; align-items: end; justify-items: center; }
+.histogram-bar { width: 100%; min-height: 2px; border-radius: 8px 8px 3px 3px; background: var(--accent); opacity: 0.85; }
+.histogram-count { font-size: 12px; font-weight: 650; color: var(--ink-2); }
+.histogram-label { font-size: 11.5px; color: var(--muted); }

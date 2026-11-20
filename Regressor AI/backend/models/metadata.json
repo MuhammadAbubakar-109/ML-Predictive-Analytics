@@ -1,0 +1,420 @@
+{
+  "trained_at": "2026-10-26T04:56:39.566909+00:00",
+  "best_model": "ridge",
+  "target": "Monthly_Salary",
+  "features": [
+    "Experience_Years",
+    "Industry_Experience_Years",
+    "Years_in_Current_Role",
+    "Years_at_Company",
+    "Certifications_Count",
+    "Technical_Skills_Count",
+    "Team_Size_Managed",
+    "Employee_Count",
+    "Working_Hours_Per_Week",
+    "Performance_Rating",
+    "Job_Grade",
+    "Job_Evaluation_Score",
+    "Local_Median_Salary",
+    "Inflation_Rate",
+    "Year",
+    "Job_Title",
+    "Job_Family",
+    "Job_Level",
+    "Department",
+    "Industry",
+    "Education_Level",
+    "Field_of_Study",
+    "Management_Responsibility",
+    "Company_Size",
+    "Company_Type",
+    "Region",
+    "City",
+    "Employment_Type",
+    "Remote_Work_Type"
+  ],
+  "n_rows": 10000,
+  "target_mean": 124688.6,
+  "comparison": [
+    {
+      "model": "ridge",
+      "cv_rmse": 25322.22358546538,
+      "best_params": {
+        "alpha": 0.1
+      },
+      "seconds": 1.1,
+      "test_rmse": 23893.00390478822,
+      "test_mae": 14283.694232413212,
+      "test_r2": 0.9312555022707888,
+      "test_mape": 11.775956819030851
+    },
+    {
+      "model": "linear_regression",
+      "cv_rmse": 25323.589720993856,
+      "best_params": {},
+      "seconds": 0.7,
+      "test_rmse": 23905.46455646278,
+      "test_mae": 14284.415947813512,
+      "test_r2": 0.9311837804721399,
+      "test_mape": 11.776805433796213
+    },
+    {
+      "model": "lasso",
+      "cv_rmse": 25485.887566024725,
+      "best_params": {
+        "alpha": 0.0001
+      },
+      "seconds": 4.7,
+      "test_rmse": 23727.806488427064,
+      "test_mae": 14331.655848096576,
+      "test_r2": 0.9322028217502196,
+      "test_mape": 11.802694624729417
+    },
+    {
+      "model": "svr",
+      "cv_rmse": 29794.032701906126,
+      "best_params": {
+        "C": 10.0,
+        "epsilon": 0.05
+      },
+      "seconds": 57.8,
+      "test_rmse": 28000.833037109296,
+      "test_mae": 14790.753846141535,
+      "test_r2": 0.9055855779385419,
+      "test_mape": 11.353408596700932
+    },
+    {
+      "model": "random_forest",
+      "cv_rmse": 36223.81978081211,
+      "best_params": {
+        "max_depth": 20,
+        "min_samples_leaf": 2
+      },
+      "seconds": 46.3,
+      "test_rmse": 34794.964154348905,
+      "test_mae": 21182.052320705785,
+      "test_r2": 0.8542095011748551,
+      "test_mape": 16.44965082372571
+    },
+    {
+      "model": "decision_tree",
+      "cv_rmse": 46230.46435234504,
+      "best_params": {
+        "max_depth": 12,
+        "min_samples_leaf": 10
+      },
+      "seconds": 3.9,
+      "test_rmse": 45362.84678264875,
+      "test_mae": 28069.267401369245,
+      "test_r2": 0.7522024332195969,
+      "test_mape": 21.876506708377082
+    }
+  ],
+  "options": {
+    "categorical": {
+      "Job_Title": [
+        "Academic Coordinator",
+        "Accountant",
+        "Accounts Assistant",
+        "Administrative Officer",
+        "Backend Developer",
+        "Brand Manager",
+        "Business Analyst",
+        "Business Development Executive",
+        "Call Center Agent",
+        "Civil Engineer",
+        "Content Writer",
+        "Credit Officer",
+        "Customer Support Representative",
+        "Cybersecurity Analyst",
+        "Data Analyst",
+        "Data Scientist",
+        "Database Administrator",
+        "DevOps Engineer",
+        "Digital Marketing Specialist",
+        "Electrical Engineer",
+        "Executive Assistant",
+        "Financial Analyst",
+        "Frontend Developer",
+        "Full Stack Developer",
+        "HR Generalist",
+        "HR Officer",
+        "Healthcare Administrator",
+        "IT Support Specialist",
+        "Internal Auditor",
+        "Key Account Manager",
+        "Lab Technician",
+        "Lecturer",
+        "Logistics Coordinator",
+        "Machine Learning Engineer",
+        "Machine Operator",
+        "Maintenance Technician",
+        "Marketing Executive",
+        "Mechanical Engineer",
+        "Medical Officer",
+        "Mobile App Developer",
+        "Network Engineer",
+        "Office Assistant",
+        "Operations Executive",
+        "Payroll Specialist",
+        "Pharmacist",
+        "Procurement Officer",
+        "Production Engineer",
+        "Production Supervisor",
+        "Project Coordinator",
+        "QA Engineer",
+        "Quality Engineer",
+        "Quality Inspector",
+        "Receptionist",
+        "Recruiter",
+        "Relationship Manager",
+        "Sales Executive",
+        "School Teacher",
+        "Software Engineer",
+        "Staff Nurse",
+        "Supply Chain Analyst",
+        "Telecom Engineer",
+        "Treasury Analyst",
+        "UI/UX Designer",
+        "Warehouse Supervisor"
+      ],
+      "Job_Family": [
+        "Administration & Support",
+        "Education",
+        "Engineering",
+        "Finance & Accounting",
+        "Healthcare",
+        "Human Resources",
+        "Information Technology",
+        "Manufacturing",
+        "Operations & Supply Chain",
+        "Sales & Marketing"
+      ],
+      "Job_Level": [
+        "Director",
+        "Executive",
+        "Junior",
+        "Lead",
+        "Manager",
+        "Mid-level",
+        "Senior"
+      ],
+      "Department": [
+        "Academics",
+        "Administration",
+        "Clinical",
+        "Engineering",
+        "Finance",
+        "HR",
+        "IT",
+        "Marketing",
+        "Operations",
+        "Production",
+        "Sales"
+      ],
+      "Industry": [
+        "Banking & Finance",
+        "Construction & Real Estate",
+        "Education",
+        "Energy & Oil/Gas",
+        "FMCG & Retail",
+        "Government / Public Sector",
+        "Healthcare",
+        "Hospitality & Services",
+        "Logistics & Transport",
+        "Manufacturing & Textile",
+        "NGO / Development",
+        "Pharmaceuticals",
+        "Technology & Software",
+        "Telecommunications"
+      ],
+      "Education_Level": [
+        "Bachelor's",
+        "Diploma",
+        "Intermediate",
+        "MPhil",
+        "Master's",
+        "PhD"
+      ],
+      "Field_of_Study": [
+        "Accounting & Finance",
+        "Arts",
+        "Business Administration",
+        "Business Diploma",
+        "Chemical Engineering",
+        "Civil Engineering",
+        "Commerce",
+        "Computer Science",
+        "Data Science",
+        "Diploma of Associate Engineer (DAE)",
+        "Economics",
+        "Education",
+        "Electrical Engineering",
+        "English",
+        "HR Management",
+        "Health Administration",
+        "Industrial Engineering",
+        "Industrial Technology",
+        "Information Technology",
+        "Marketing",
+        "Mass Communication",
+        "Mathematics",
+        "Mechanical Engineering",
+        "Medical Lab Technology",
+        "Medicine (MBBS)",
+        "Nursing",
+        "Pharmacy (Pharm-D)",
+        "Physics",
+        "Pre-Engineering",
+        "Pre-Medical",
+        "Psychology",
+        "Software Engineering",
+        "Supply Chain Management",
+        "Technical Diploma",
+        "Telecommunication Engineering",
+        "Textile Engineering"
+      ],
+      "Management_Responsibility": [
+        "No",
+        "Yes"
+      ],
+      "Company_Size": [
+        "Enterprise",
+        "Large",
+        "Medium",
+        "Small"
+      ],
+      "Company_Type": [
+        "Government",
+        "Multinational",
+        "Nonprofit / NGO",
+        "Private Limited",
+        "Public Listed",
+        "Startup"
+      ],
+      "Region": [
+        "Balochistan",
+        "Islamabad Capital Territory",
+        "Khyber Pakhtunkhwa",
+        "Punjab",
+        "Sindh"
+      ],
+      "City": [
+        "Faisalabad",
+        "Hyderabad",
+        "Islamabad",
+        "Karachi",
+        "Lahore",
+        "Multan",
+        "Peshawar",
+        "Quetta",
+        "Rawalpindi",
+        "Sialkot"
+      ],
+      "Employment_Type": [
+        "Contract",
+        "Full-time",
+        "Part-time",
+        "Temporary"
+      ],
+      "Remote_Work_Type": [
+        "Hybrid",
+        "On-site",
+        "Remote"
+      ]
+    },
+    "numeric": {
+      "Experience_Years": {
+        "min": 0.0,
+        "max": 36.0,
+        "median": 6.0
+      },
+      "Industry_Experience_Years": {
+        "min": 0.0,
+        "max": 35.0,
+        "median": 4.5
+      },
+      "Years_in_Current_Role": {
+        "min": 0.0,
+        "max": 14.5,
+        "median": 1.5
+      },
+      "Years_at_Company": {
+        "min": 0.0,
+        "max": 16.0,
+        "median": 2.5
+      },
+      "Certifications_Count": {
+        "min": 0.0,
+        "max": 6.0,
+        "median": 0.0
+      },
+      "Technical_Skills_Count": {
+        "min": 1.0,
+        "max": 16.0,
+        "median": 5.0
+      },
+      "Team_Size_Managed": {
+        "min": 0.0,
+        "max": 164.0,
+        "median": 0.0
+      },
+      "Employee_Count": {
+        "min": 11.0,
+        "max": 59979.0,
+        "median": 338.0
+      },
+      "Working_Hours_Per_Week": {
+        "min": 15.0,
+        "max": 54.0,
+        "median": 45.0
+      },
+      "Performance_Rating": {
+        "min": 1.0,
+        "max": 5.0,
+        "median": 3.4
+      },
+      "Job_Grade": {
+        "min": 1.0,
+        "max": 12.0,
+        "median": 5.0
+      },
+      "Job_Evaluation_Score": {
+        "min": 150.0,
+        "max": 875.0,
+        "median": 426.0
+      },
+      "Local_Median_Salary": {
+        "min": 34500.0,
+        "max": 237000.0,
+        "median": 91000.0
+      },
+      "Inflation_Rate": {
+        "min": 4.5,
+        "max": 29.2,
+        "median": 6.0
+      },
+      "Year": {
+        "min": 2023.0,
+        "max": 2026.0,
+        "median": 2025.0
+      }
+    },
+    "defaults_categorical": {
+      "Job_Title": "Production Supervisor",
+      "Job_Family": "Information Technology",
+      "Job_Level": "Senior",
+      "Department": "IT",
+      "Industry": "Manufacturing & Textile",
+      "Education_Level": "Bachelor's",
+      "Field_of_Study": "Commerce",
+      "Management_Responsibility": "No",
+      "Company_Size": "Medium",
+      "Company_Type": "Private Limited",
+      "Region": "Punjab",
+      "City": "Karachi",
+      "Employment_Type": "Full-time",
+      "Remote_Work_Type": "On-site"
+    }
+  }
+}

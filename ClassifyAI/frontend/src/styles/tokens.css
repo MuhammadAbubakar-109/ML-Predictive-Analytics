@@ -1,0 +1,123 @@
+/* ============ Design tokens ============
+   Light is the default. Dark applies when the person picks it, or follows the system
+   when they have not chosen (see hooks/useTheme.js). */
+:root {
+  --font-display: "Bricolage Grotesque", "Instrument Sans", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --bg: #edf0f5;
+  --surface: #ffffff;
+  --surface-2: #f5f7fb;
+  --surface-3: #e8ecf3;
+  --ink: #0f1b2d;
+  --ink-2: #2a3a52;
+  --muted: #5b6b83;
+  --line: #dce2ec;
+  --line-strong: #c4cddb;
+
+  --accent: #2f4bff;
+  --accent-ink: #ffffff;
+  --accent-strong: #2339d6;
+  --accent-soft: color-mix(in srgb, var(--accent) 11%, transparent);
+
+  /* risk colours: fill / text-safe version */
+  --low: #12b08a;   --low-ink: #0a7a5c;
+  --mid: #e8a317;   --mid-ink: #8a5a00;
+  --high: #e5484d;  --high-ink: #b82a30;
+
+  /* the dark instrument panel (stays dark in both themes) */
+  --panel: #0e1a2e;
+  --panel-2: #13233d;
+  --panel-ink: #e9effa;
+  --panel-muted: #93a6c4;
+  --panel-line: #26395c;
+  --panel-accent: #8fa3ff;
+
+  /* one colour per model, chosen to avoid the risk colours */
+  --m1: #3b5bff;
+  --m2: #8b5cf6;
+  --m3: #0ea5e9;
+  --m4: #ec4899;
+  --m5: #64748b;
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 1px 2px rgba(15, 27, 45, 0.06), 0 12px 28px -16px rgba(15, 27, 45, 0.22);
+  --shadow-pop: 0 18px 50px -12px rgba(8, 16, 32, 0.45);
+
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%235b6b83' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0f1a;
+  --surface: #111a2b;
+  --surface-2: #152036;
+  --surface-3: #1c2a45;
+  --ink: #e8eef9;
+  --ink-2: #c4d0e4;
+  --muted: #8ea0bc;
+  --line: #223049;
+  --line-strong: #2f4166;
+
+  --accent: #8fa3ff;
+  --accent-ink: #0a0f1a;
+  --accent-strong: #aab8ff;
+
+  --low: #38d5a8;   --low-ink: #5fe0bb;
+  --mid: #f5b942;   --mid-ink: #f5c35e;
+  --high: #ff6b72;  --high-ink: #ff8a8f;
+
+  --panel: #0b1322;
+  --panel-2: #101c31;
+  --panel-line: #22324f;
+
+  --m1: #7f95ff;
+  --m2: #a78bfa;
+  --m3: #38bdf8;
+  --m4: #f472b6;
+  --m5: #94a3b8;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238ea0bc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0f1a;
+    --surface: #111a2b;
+    --surface-2: #152036;
+    --surface-3: #1c2a45;
+    --ink: #e8eef9;
+    --ink-2: #c4d0e4;
+    --muted: #8ea0bc;
+    --line: #223049;
+    --line-strong: #2f4166;
+
+    --accent: #8fa3ff;
+    --accent-ink: #0a0f1a;
+    --accent-strong: #aab8ff;
+
+    --low: #38d5a8;   --low-ink: #5fe0bb;
+    --mid: #f5b942;   --mid-ink: #f5c35e;
+    --high: #ff6b72;  --high-ink: #ff8a8f;
+
+    --panel: #0b1322;
+    --panel-2: #101c31;
+    --panel-line: #22324f;
+
+    --m1: #7f95ff;
+    --m2: #a78bfa;
+    --m3: #38bdf8;
+    --m4: #f472b6;
+    --m5: #94a3b8;
+
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238ea0bc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+
+    color-scheme: dark;
+  }
+}
